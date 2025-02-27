@@ -1,11 +1,7 @@
 import React from "react";
 import { Button, Box, Typography, Stack } from "@mui/material";
 import { useSpring, animated } from "react-spring";
-
-interface CounterProps {
-  count: number;
-  setCount: React.Dispatch<React.SetStateAction<number>>;
-}
+import { CounterProps } from "../types/counter.types";
 
 const Counter: React.FC<CounterProps> = ({ count, setCount }) => {
   const backgroundProps = useSpring({

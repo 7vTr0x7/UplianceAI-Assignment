@@ -3,6 +3,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Counter from "./components/Counter";
 import { useEffect, useState } from "react";
+import UserForm from "./components/UserForm";
+import { User } from "./types/user.types";
 
 const darkTheme = createTheme({
   palette: {
@@ -29,6 +31,17 @@ function App() {
   useEffect(() => {
     localStorage.setItem("count", count.toString());
   }, [count]);
+
+  const [userData, setUserData] = useState<User>(() => {
+    const savedUserData = localStorage.getItem("userData");
+    return savedUserData ? JSON.parse(savedUserData) : null;
+  });
+
+  useEffect(() => {
+    if (userData) {
+      localStorage.setItem("userData", JSON.stringify(userData));
+    }
+  }, [userData]);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -64,12 +77,7 @@ function App() {
               <Typography variant="h6" gutterBottom>
                 User Data Form
               </Typography>
-              <Box
-                sx={{
-                  bgcolor: "background.default",
-                  minHeight: "50vh",
-                  p: 2,
-                }}></Box>
+              <UserForm setUserData={setUserData} userData={userData} />
             </Paper>
           </Grid>
 
