@@ -1,6 +1,8 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Counter from "./components/Counter";
+import { useEffect, useState } from "react";
 
 const darkTheme = createTheme({
   palette: {
@@ -19,6 +21,15 @@ const darkTheme = createTheme({
 });
 
 function App() {
+  const [count, setCount] = useState<number>(() => {
+    const savedCount = localStorage.getItem("count");
+    return savedCount ? parseInt(savedCount) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("count", count.toString());
+  }, [count]);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -30,12 +41,7 @@ function App() {
                 Counter
               </Typography>
 
-              <Box
-                sx={{
-                  bgcolor: "background.default",
-                  minHeight: "50vh",
-                  p: 2,
-                }}></Box>
+              <Counter count={count} setCount={setCount} />
             </Paper>
           </Grid>
 
