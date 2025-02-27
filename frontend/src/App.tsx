@@ -5,6 +5,7 @@ import Counter from "./components/Counter";
 import { useEffect, useState } from "react";
 import UserForm from "./components/UserForm";
 import { User } from "./types/user.types";
+import UserDetails from "./components/UserDetails";
 
 const darkTheme = createTheme({
   palette: {
@@ -86,12 +87,7 @@ function App() {
               <Typography variant="h6" gutterBottom>
                 Results
               </Typography>
-              <Box
-                sx={{
-                  bgcolor: "background.default",
-                  minHeight: "50vh",
-                  p: 2,
-                }}></Box>
+              <UserDetails count={count} userData={userData} />
             </Paper>
           </Grid>
         </Grid>

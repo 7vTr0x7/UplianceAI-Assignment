@@ -16,3 +16,8 @@ export interface UserFormDataProps {
   setUserData: React.Dispatch<React.SetStateAction<User>>
   userData: User
 }
+
+export interface UserDetailsProps {
+  count: number,
+  userData: User
+}
